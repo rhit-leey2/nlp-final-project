@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
-  <link
-    rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
-  />
-  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+    <title>MyPharm</title>
+    <link rel="shortcut icon"
+          href="{{ url_for('static', filename='medicine-jar.png') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
-  <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
-  </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
+<div id="logoContainer">
+    <div id="logo">
+        <img id="headerLogo" src="{{ url_for('static', filename='medicine-jar.png') }}" class="icon"/>
+    </div>
+    <div>
+        <h3 id="name">My Pharm</h3>
+    </div>
+</div>
+
+<div id="inputContainer">
+
+    <div id="desc">
+        Tell me how you feel and we will recommend appropriate medication/pills!
+    </div>
+
+    <form action="/" method="post">
+        <input type="text" name="feel_input"
+               placeholder="How are you today?" required/>
+        <input type="submit" value="RECOMMEND"/>
+    </form>
+</div>
+
+<div id="outputContainer">
+
+
+</div>
+
+
+{% if result %}
+<div class="result">{{ result }}</div>
+{% endif %}
 </body>
+
