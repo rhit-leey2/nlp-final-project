@@ -23,20 +23,40 @@
     </div>
 
     <form action="/" method="post">
-        <input type="text" name="feel_input"
-               placeholder="How are you today?" required/>
-        <input type="submit" value="RECOMMEND"/>
+        <textarea type="text" id="feel" name="feel_input"
+                  placeholder="How are you today?" required></textarea>
+        <input type="submit" value="Recommend"/>
     </form>
 </div>
 
 <div id="outputContainer">
+    {% if symptoms %}
+    <div id="possible">You are possibly experiencing...</div>
+    <div class="symptoms">{{ result }}</div>
+    {% endif %}
 
-
+    {% if symptoms_list %}
+    <div id="recommendations">These are the recommended medications:</div>
+    <ul class="symptoms_list">
+        {% for symptom in symptoms_list %}
+        <li>{{ symptom }}</li>
+        <!-- Code here to display each symptoms-->
+        {% endfor %}
+    </ul>
+    {% endif %}
 </div>
 
 
-{% if result %}
-<div class="result">{{ result }}</div>
-{% endif %}
 </body>
+
+
+<script>
+
+    document.getElementById("feel").addEventListener("input", function () {
+        this.style.height = "auto"; // Reset the height to auto
+        this.style.height = this.scrollHeight + "px"; // Set the height to match the content
+    });
+
+
+</script>
 
