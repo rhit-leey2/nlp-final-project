@@ -1,21 +1,112 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
-  <link
-    rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
-  />
-  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+    <title>MyPharm</title>
+    <link rel="shortcut icon"
+          href="{{ url_for('static', filename='medicine-jar.png') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
-  <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
-  </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
+<div id="logoContainer">
+    <div id="logo">
+        <img id="headerLogo" src="{{ url_for('static', filename='medicine-jar.png') }}" class="icon"/>
+    </div>
+    <div>
+        <h3 id="name">My Pharm</h3>
+    </div>
+</div>
+
+<div id="inputContainer">
+
+    <div id="desc">
+        Tell me how you feel and we will recommend appropriate medication/pills!
+    </div>
+
+    <form action="/" method="post">
+        <textarea type="text" id="feel" name="feel_input"
+                  placeholder="How are you today?" required></textarea>
+        <input type="submit" value="Recommend"/>
+    </form>
+</div>
+
+<!--SAMPLE CODE-->
+<!--<div id="outputContainer">-->
+<!--    <div id="possible">You are possibly experiencing...</div>-->
+<!--    <div class="symptoms">Sore throat, Fever, Depression</div>-->
+
+
+<!--    <div id="recommendations">These are the recommended medications:-->
+<!--        <table class="medication_table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Condition</th>-->
+<!--                <th>Drug</th>-->
+<!--                <th>Type</th>-->
+<!--                <th>Form</th>-->
+<!--                <th>EaseOfUse</th>-->
+<!--                <th>Effective</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <td>Sore throat</td>-->
+<!--                <td>Acetaminophen-DM</td>-->
+<!--                <td>OTC</td>-->
+<!--                <td>Liquid (Drink)</td>-->
+<!--                <td>3.67</td>-->
+<!--                <td>2.67</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--THIS IS THE ACTUAL CODE -->
+<div id="outputContainer">
+    {% if result %}
+    <div id="possible">You are possibly experiencing...</div>
+    <div class="result">{{ result.split(';')[0] }}</div>
+    {% endif %}
+
+    {% if result %}
+    <div id="recommendations">These are the recommended medications:</div>
+        <table class="medication_table">
+            <thead>
+            <tr>
+                <th>Condition</th>
+                <th>Drug</th>
+                <th>Type</th>
+                <th>Form</th>
+                <th>EaseOfUse</th>
+                <th>Effective</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ result.split(';')[1].split(',')[0] }}</td>
+                <td>{{ result.split(';')[1].split(',')[1] }}</td>
+                <td>{{ result.split(';')[1].split(',')[2] }}</td>
+                <td>{{ result.split(';')[1].split(',')[3] }}</td>
+                <td>{{ result.split(';')[1].split(',')[4] }}</td>
+                <td>{{ result.split(';')[1].split(',')[5] }}</td>
+            </tr>
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+
+
 </body>
+
+
+<script>
+
+    document.getElementById("feel").addEventListener("input", function () {
+        this.style.height = "auto"; // Reset the height to auto
+        this.style.height = this.scrollHeight + "px"; // Set the height to match the content
+    });
+
+
+</script>
+

@@ -30,19 +30,35 @@
 </div>
 
 <div id="outputContainer">
-    {% if symptoms %}
+    {% if result %}
     <div id="possible">You are possibly experiencing...</div>
-    <div class="symptoms">{{ result }}</div>
+    <div class="result">{{ result.split(';')[0] }}</div>
     {% endif %}
 
-    {% if symptoms_list %}
+    {% if result %}
     <div id="recommendations">These are the recommended medications:</div>
-    <ul class="symptoms_list">
-        {% for symptom in symptoms_list %}
-        <li>{{ symptom }}</li>
-        <!-- Code here to display each symptoms-->
-        {% endfor %}
-    </ul>
+        <table class="medication_table">
+            <thead>
+            <tr>
+                <th>Condition</th>
+                <th>Drug</th>
+                <th>Type</th>
+                <th>Form</th>
+                <th>EaseOfUse</th>
+                <th>Effective</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ result.split(';')[1].split(',')[0] }}</td>
+                <td>{{ result.split(';')[1].split(',')[1] }}</td>
+                <td>{{ result.split(';')[1].split(',')[2] }}</td>
+                <td>{{ result.split(';')[1].split(',')[3] }}</td>
+                <td>{{ result.split(';')[1].split(',')[4] }}</td>
+                <td>{{ result.split(';')[1].split(',')[5] }}</td>
+            </tr>
+            </tbody>
+        </table>
     {% endif %}
 </div>
 
